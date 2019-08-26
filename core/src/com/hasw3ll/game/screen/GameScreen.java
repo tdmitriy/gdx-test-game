@@ -31,12 +31,18 @@ public class GameScreen extends AbstractScreen {
         hud = new Hud();
         hudEventsManager = new HudEventsManager(hud);
 
-        Image bgImage = new Image(textureBackground);
-        bgImage.setFillParent(true);
+        initUiElements();
 
-        stage.addActor(bgImage);
+        generateEnemies();
+    }
+
+
+    private void initUiElements() {
+        stage.addActor(new Image(textureBackground));
         stage.addActor(hud.loadHudElements());
+    }
 
+    private void generateEnemies() {
         for (Enemy enemy : EnemyFactory.generateEnemies(ENEMIES_COUNT)) {
             enemy.setPlayerDataChangedNotifier(hudEventsManager);
             stage.addActor(enemy);
@@ -56,9 +62,9 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.act(delta);
         stage.draw();
+
         WaypointFactory.debugWaypoints(stage.getBatch());
     }
 

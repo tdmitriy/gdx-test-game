@@ -19,6 +19,9 @@ public class Hud {
     private Label labelScore;
     private Label labelPlayerHp;
 
+    private Color BLUE = toRGB(0, 102, 255, 1);
+    private Label.LabelStyle lblStylePlayerHp = new Label.LabelStyle(new BitmapFont(), BLUE);
+
     public Hud() {
         waveNum = 0;
         score = 0;
@@ -28,9 +31,9 @@ public class Hud {
     }
 
     private void loadLabels() {
-        labelWaveNum = new Label(valueOf(waveNum), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelScore = new Label(format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelPlayerHp = new Label(valueOf(playerHp), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
+        labelWaveNum = new Label(valueOf(waveNum), new Label.LabelStyle(new BitmapFont(), BLUE));
+        labelScore = new Label(format("%03d", score), new Label.LabelStyle(new BitmapFont(), BLUE));
+        labelPlayerHp = new Label(valueOf(playerHp), lblStylePlayerHp);
     }
 
     public Table loadHudElements() {
@@ -45,7 +48,16 @@ public class Hud {
     }
 
     public void setLabelPlayerHp(int playerHp) {
+        if (playerHp < 5)
+            lblStylePlayerHp.fontColor = Color.RED;
+        else
+            lblStylePlayerHp.fontColor = Color.GREEN;
+
         this.playerHp = playerHp;
         labelPlayerHp.setText(valueOf(this.playerHp));
+    }
+
+    public Color toRGB(int r, int g, int b, int a) {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f, a);
     }
 }
