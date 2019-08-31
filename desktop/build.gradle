@@ -1,38 +1,28 @@
-apply plugin: "java"
+apply plugin: "application"
 
 sourceCompatibility = 1.8
-sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = ["../core/assets"]
+sourceSets.main.java.srcDirs = ["src/"]
+sourceSets.main.resources.srcDirs += [rootProject.file('assets').absolutePath]
 
-project.ext.mainClassName = "com.hasw3ll.game.desktop.DesktopLauncher"
-project.ext.assetsDir = new File("../core/assets")
+mainClassName = "com.hasw3ll.game.desktop.DesktopLauncher"
 
-task run(dependsOn: classes, type: JavaExec) {
-    main = project.mainClassName
-    classpath = sourceSets.main.runtimeClasspath
-    standardInput = System.in
-    workingDir = project.assetsDir
-    ignoreExitValue = true
-}
-
-task debug(dependsOn: classes, type: JavaExec) {
-    main = project.mainClassName
-    classpath = sourceSets.main.runtimeClasspath
-    standardInput = System.in
-    workingDir = project.assetsDir
-    ignoreExitValue = true
-    debug = true
-}
-
-task dist(type: Jar) {
+jar {
+    archiveName "${appName}-${version}.jar"
+    from { configurations.compile.collect { zipTree(it) } }
     manifest {
         attributes 'Main-Class': project.mainClassName
     }
-    from {
-        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    with jar
+}
+
+run {
+    ignoreExitValue = true
 }
 
 
-dist.dependsOn classes
+dependencies {
+    compile project(':core')
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+}
