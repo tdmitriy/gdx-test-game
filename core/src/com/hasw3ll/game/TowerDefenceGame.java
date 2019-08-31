@@ -1,5 +1,6 @@
 package com.hasw3ll.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +11,9 @@ public class TowerDefenceGame extends Game {
 
     @Override
     public void create() {
+        if (AppConstants.DEBUG)
+            Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
         ScreenStateManager.getInstance().init(this);
         ScreenStateManager.getInstance().showScreen(ScreenState.GAME);
     }

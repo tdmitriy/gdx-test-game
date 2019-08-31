@@ -1,7 +1,7 @@
 package com.hasw3ll.game.manager;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.hasw3ll.game.TowerDefenceGame;
 import com.hasw3ll.game.screen.AbstractScreen;
 import com.hasw3ll.game.screen.GameScreen;
 import com.hasw3ll.game.screen.SplashScreen;
@@ -9,7 +9,7 @@ import com.hasw3ll.game.screen.SplashScreen;
 public class ScreenStateManager {
 
     private static ScreenStateManager instance;
-    private TowerDefenceGame game;
+    private Game game;
 
     private ScreenStateManager() {
     }
@@ -20,7 +20,7 @@ public class ScreenStateManager {
         return instance;
     }
 
-    public void init(final TowerDefenceGame game) {
+    public void init(final Game game) {
         this.game = game;
     }
 
@@ -36,9 +36,9 @@ public class ScreenStateManager {
     private AbstractScreen getScreen(ScreenState state) {
         switch (state) {
             case SPLASH:
-                return new SplashScreen();
+                return new SplashScreen(game);
             case GAME:
-                return new GameScreen();
+                return new GameScreen(game);
             default:
                 throw new IllegalStateException("Can't get screen for state: " + state);
         }
