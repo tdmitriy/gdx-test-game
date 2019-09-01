@@ -1,8 +1,8 @@
 package com.hasw3ll.game.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.hasw3ll.game.TowerDefenceGame;
 import com.hasw3ll.game.manager.ScreenState;
 import com.hasw3ll.game.manager.ScreenStateManager;
 
@@ -10,7 +10,7 @@ public class SplashScreen extends AbstractScreen {
 
     private float timer = 0f;
 
-    public SplashScreen(Game game) {
+    public SplashScreen(TowerDefenceGame game) {
         super(game);
     }
 

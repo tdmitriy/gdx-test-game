@@ -1,6 +1,5 @@
 package com.hasw3ll.game.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -9,19 +8,20 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hasw3ll.game.AppConstants;
+import com.hasw3ll.game.TowerDefenceGame;
 
 import static com.hasw3ll.game.util.GameUtils.logDebug;
 
 public abstract class AbstractScreen implements Screen, InputProcessor {
 
-    protected Game game;
+    protected TowerDefenceGame game;
     protected Stage uiStage;
     protected Stage mainStage;
 
     protected Table uiTable;
     private boolean paused = false;
 
-    public AbstractScreen(Game game) {
+    public AbstractScreen(TowerDefenceGame game) {
         logDebug("Showing " + this.getClass().getSimpleName());
 
         this.game = game;

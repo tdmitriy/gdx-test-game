@@ -8,6 +8,10 @@ public class GameUtils {
         Gdx.app.debug("DEBUG", message);
     }
 
+    public static void logError(String message) {
+        Gdx.app.error("ERROR", message);
+    }
+
     public static void log(String message) {
         Gdx.app.log("INFO", message);
     }

@@ -1,7 +1,7 @@
 package com.hasw3ll.game.manager;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.hasw3ll.game.TowerDefenceGame;
 import com.hasw3ll.game.screen.AbstractScreen;
 import com.hasw3ll.game.screen.GameScreen;
 import com.hasw3ll.game.screen.SplashScreen;
@@ -9,7 +9,7 @@ import com.hasw3ll.game.screen.SplashScreen;
 public class ScreenStateManager {
 
     private static ScreenStateManager instance;
-    private Game game;
+    private TowerDefenceGame game;
 
     private ScreenStateManager() {
     }
@@ -20,7 +20,7 @@ public class ScreenStateManager {
         return instance;
     }
 
-    public void init(final Game game) {
+    public void init(final TowerDefenceGame game) {
         this.game = game;
     }
 
